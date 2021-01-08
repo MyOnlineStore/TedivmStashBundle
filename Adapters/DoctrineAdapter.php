@@ -11,10 +11,12 @@
  */
 
 namespace Tedivm\StashBundle\Adapters;
+
 use Doctrine\Common\Cache\Cache as DoctrineCacheInterface;
 
 /**
  * Class DoctrineAdapter
+ *
  * @package Tedivm\StashBundle\Adapters
  * @author Josh Hall-Bachner <jhallbachner@gmail.com>
  * @author Robert Hafner <tedivm@tedivm.com>
@@ -107,7 +109,8 @@ class DoctrineAdapter implements DoctrineCacheInterface
 
         $id = $this->normalizeId($id);
         $item = $this->cacheService->getItem($id);
-        $item->set($data, $lifeTime);
+        $item->set($data);
+        $item->setTTL($lifeTime);
 
         return $this->cacheService->save($item);
     }
